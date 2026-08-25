@@ -1,7 +1,6 @@
 const BASE_URL = "https://www.naamjapa.online";
 
 export default async function sitemap() {
-  // Public static pages
   const staticPages = [
     "",
     "/about",
@@ -20,7 +19,6 @@ export default async function sitemap() {
     priority: page === "" ? 1 : 0.7,
   }));
 
-  // Dynamic mantra pages
   let mantraUrls = [];
 
   try {
@@ -44,69 +42,8 @@ export default async function sitemap() {
       }));
     }
   } catch (error) {
-    console.error("Failed to fetch mantras for sitemap:", error);
+    console.error("Failed to load mantras for sitemap:", error);
   }
 
   return [...staticUrls, ...mantraUrls];
 }
-
-
-
-
-// ------------------------------------------------------------------------
-
-
-// const BASE_URL = "https://www.naamjapa.online";
-
-// export default function sitemap() {
-//   return [
-//     {
-//       url: BASE_URL,
-//       lastModified: new Date(),
-//       changeFrequency: "weekly",
-//       priority: 1,
-//     },
-//     {
-//       url: `${BASE_URL}/about`,
-//       lastModified: new Date(),
-//       changeFrequency: "monthly",
-//       priority: 0.7,
-//     },
-//     {
-//       url: `${BASE_URL}/contact`,
-//       lastModified: new Date(),
-//       changeFrequency: "monthly",
-//       priority: 0.7,
-//     },
-//     {
-//       url: `${BASE_URL}/privacy-policy`,
-//       lastModified: new Date(),
-//       changeFrequency: "monthly",
-//       priority: 0.5,
-//     },
-//     {
-//       url: `${BASE_URL}/terms`,
-//       lastModified: new Date(),
-//       changeFrequency: "monthly",
-//       priority: 0.5,
-//     },
-//     {
-//       url: `${BASE_URL}/disclaimer`,
-//       lastModified: new Date(),
-//       changeFrequency: "monthly",
-//       priority: 0.5,
-//     },
-//     {
-//       url: `${BASE_URL}/naam-japa-counter`,
-//       lastModified: new Date(),
-//       changeFrequency: "weekly",
-//       priority: 0.9,
-//     },
-//     {
-//       url: `${BASE_URL}/statistics`,
-//       lastModified: new Date(),
-//       changeFrequency: "weekly",
-//       priority: 0.7,
-//     },
-//   ];
-// }
