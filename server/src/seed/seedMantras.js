@@ -54,7 +54,7 @@ const mantras = [
     ],
   },
   {
-    slug: "gayatri-mantra",
+    slug: "gaytri-mantra",
     nameEnglish: "Gayatri Mantra",
     nameDevanagari: "ॐ भूर्भुवः स्वः",
     description: "A Vedic hymn from the Rigveda, widely regarded as one of the oldest and most universal mantras.",
