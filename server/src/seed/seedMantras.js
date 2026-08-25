@@ -54,8 +54,8 @@ const mantras = [
     ],
   },
   {
-    slug: "gaytri-mantra",
-    nameEnglish: "Gaytri Mantra",
+    slug: "gayatri-mantra",
+    nameEnglish: "Gayatri Mantra",
     nameDevanagari: "ॐ भूर्भुवः स्वः",
     description: "A Vedic hymn from the Rigveda, widely regarded as one of the oldest and most universal mantras.",
     meaning: "The Gayatri Mantra is a verse from the Rigveda (one of the oldest Vedic texts), dedicated to Savitr, a solar deity, and is widely chanted across many Hindu traditions regardless of specific sect. It's often associated with wisdom, clarity, and the illumination of the intellect.",
