@@ -54,7 +54,7 @@ const mantras = [
     ],
   },
   {
-    slug: "gaytri-mantra",
+    slug: "gayatri-mantra",
     nameEnglish: "Gayatri Mantra",
     nameDevanagari: "ॐ भूर्भुवः स्वः",
     description: "A Vedic hymn from the Rigveda, widely regarded as one of the oldest and most universal mantras.",
@@ -78,12 +78,23 @@ const mantras = [
   },
 ];
 
+
 async function seed() {
   await connectDB();
+
+  // Remove old/misspelled Gayatri mantra slug
+  await Mantra.deleteOne({ slug: "gaytri-mantra" });
+
   for (const m of mantras) {
-    await Mantra.findOneAndUpdate({ slug: m.slug }, m, { upsert: true });
+    await Mantra.findOneAndUpdate(
+      { slug: m.slug },
+      m,
+      { upsert: true, new: true }
+    );
   }
+
   console.log(`Seeded ${mantras.length} mantras`);
+
   await mongoose.disconnect();
 }
 
