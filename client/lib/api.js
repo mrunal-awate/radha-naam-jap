@@ -25,4 +25,9 @@ export const api = {
   getToday: (mantraId, date) => request(`/japa/today?mantraId=${mantraId}&date=${date}`),
   getStats: () => request("/japa/stats"),
   getWeeklyStats: (startDate, endDate) => request(`/japa/stats/weekly?startDate=${startDate}&endDate=${endDate}`),
+  registerDeviceToken: (body) =>
+  request("/notifications/token", {
+    method: "POST",
+    body: JSON.stringify(body),
+  }),
 };

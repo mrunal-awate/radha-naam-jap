@@ -34,6 +34,8 @@ import authRoutes from "./routes/authRoutes.js";
 import mantraRoutes from "./routes/mantraRoutes.js";
 import japaRoutes from "./routes/japaRoutes.js";
 
+import notificationRoutes from "./routes/notificationRoutes.js";
+
 const app = express();
 
 // Middleware
@@ -50,6 +52,8 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/mantras", mantraRoutes);
 app.use("/api/japa", japaRoutes);
+
+app.use("/api/notifications", notificationRoutes);
 
 // Health check
 app.get("/api/health", (req, res) => {

@@ -1,6 +1,8 @@
 import "../styles/globals.css";
 import NavAuth from "../components/NavAuth";
 
+import FirebaseNotifications from "../components/FirebaseNotifications";
+
 export const metadata = {
   title: "Radha Naam Jap Counter — free online mantra counter",
   description: "Count your japa online, free. Track Radha Naam and other mantras, build a daily chanting streak, no signup required to start.",
@@ -32,6 +34,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
+        <FirebaseNotifications />
         <header className="site-header">
           <a href="/" className="brand">
             <span className="brand-mark">🪔</span>
