@@ -6,6 +6,7 @@ export function requireAuth(req, res, next) {
     return res.status(401).json({ error: "Not authenticated" });
   }
   const token = header.split(" ")[1];
+
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
     req.userId = payload.userId;

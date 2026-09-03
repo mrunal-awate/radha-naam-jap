@@ -89,3 +89,6 @@ coverage/
 
 .vercel/
 
+
+# Firebase Admin private credentials
+server/*-firebase-adminsdk-*.json
