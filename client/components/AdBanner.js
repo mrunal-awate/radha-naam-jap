@@ -42,7 +42,7 @@ export default function AdBanner() {
 
         console.log("[AdBanner] Calling showBanner...");
         await AdMob.showBanner({
-          adId: TEST_BANNER_AD_UNIT_ID, // TODO: swap to REAL_BANNER_AD_UNIT_ID before release build
+          adId: REAL_BANNER_AD_UNIT_ID,
           adSize: BannerAdSize.ADAPTIVE_BANNER,
           position: BannerAdPosition.BOTTOM_CENTER,
           margin: 0,
