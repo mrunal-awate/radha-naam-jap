@@ -26,18 +26,23 @@ export default function AdBanner() {
         });
         console.log("[AdBanner] AdMob initialized");
 
-        const consentInfo = await AdMob.requestConsentInfo();
+        const consentInfo = await AdMob.requestConsentInfo().catch((err) => {
+          console.warn("[AdBanner] Consent check failed (non-blocking):", err);
+          return null;
+        });
         console.log("[AdBanner] Consent info:", JSON.stringify(consentInfo));
 
-        if (consentInfo.isConsentFormAvailable && consentInfo.status === "REQUIRED") {
-          await AdMob.showConsentForm();
+        if (consentInfo?.isConsentFormAvailable && consentInfo.status === "REQUIRED") {
+          await AdMob.showConsentForm().catch((err) => {
+            console.warn("[AdBanner] showConsentForm failed (non-blocking):", err);
+          });
         }
 
         if (!mounted) return;
 
         console.log("[AdBanner] Calling showBanner...");
         await AdMob.showBanner({
-          adId: TEST_BANNER_AD_UNIT_ID,
+          adId: TEST_BANNER_AD_UNIT_ID, // TODO: swap to REAL_BANNER_AD_UNIT_ID before release build
           adSize: BannerAdSize.ADAPTIVE_BANNER,
           position: BannerAdPosition.BOTTOM_CENTER,
           margin: 0,
