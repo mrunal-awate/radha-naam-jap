@@ -2,6 +2,8 @@ import "../styles/globals.css";
 import NavAuth from "../components/NavAuth";
 
 import FirebaseNotifications from "../components/FirebaseNotifications";
+import DonateButton from "../components/DonateButton";
+
 
 export const metadata = {
   title: "Radha Naam Jap Counter — free online mantra counter",
@@ -43,6 +45,7 @@ export default function RootLayout({ children }) {
           <nav className="site-nav">
             <a href="/naam-japa-counter">Mantras</a>
             <a href="/statistics">Statistics</a>
+            <DonateButton />
             <NavAuth />
           </nav>
         </header>
