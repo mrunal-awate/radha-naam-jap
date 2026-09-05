@@ -15,6 +15,7 @@ export default function AdBanner() {
 
     (async () => {
       try {
+        console.log("[AdBanner] Starting AdMob setup...");
         const { AdMob, BannerAdPosition, BannerAdSize } = await import(
           "@capacitor-community/admob"
         );
@@ -23,17 +24,27 @@ export default function AdBanner() {
           testingDevices: [],
           initializeForTesting: true,
         });
+        console.log("[AdBanner] AdMob initialized");
+
+        const consentInfo = await AdMob.requestConsentInfo();
+        console.log("[AdBanner] Consent info:", JSON.stringify(consentInfo));
+
+        if (consentInfo.isConsentFormAvailable && consentInfo.status === "REQUIRED") {
+          await AdMob.showConsentForm();
+        }
 
         if (!mounted) return;
 
+        console.log("[AdBanner] Calling showBanner...");
         await AdMob.showBanner({
-          adId: TEST_BANNER_AD_UNIT_ID, // TODO: swap to REAL_BANNER_AD_UNIT_ID before release build
+          adId: TEST_BANNER_AD_UNIT_ID,
           adSize: BannerAdSize.ADAPTIVE_BANNER,
           position: BannerAdPosition.BOTTOM_CENTER,
           margin: 0,
         });
+        console.log("[AdBanner] showBanner call completed successfully");
       } catch (err) {
-        console.error("AdMob banner failed to load:", err);
+        console.error("[AdBanner] AdMob banner failed to load:", err);
       }
     })();
 
