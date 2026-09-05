@@ -3,6 +3,7 @@ import NavAuth from "../components/NavAuth";
 
 import FirebaseNotifications from "../components/FirebaseNotifications";
 import DonateButton from "../components/DonateButton";
+import AdBanner from "../components/AdBanner";
 
 
 export const metadata = {
@@ -37,6 +38,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <FirebaseNotifications />
+        <AdBanner />
         <header className="site-header">
           <a href="/" className="brand">
             <span className="brand-mark">🪔</span>
