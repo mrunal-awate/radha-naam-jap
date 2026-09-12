@@ -20,22 +20,46 @@ export default function NavAuth() {
 
   if (loggedIn === null) return null; // avoid flashing the wrong state on load
 
+  // if (loggedIn) {
+  //   return (
+  //     <button
+  //       onClick={handleLogout}
+  //       style={{
+  //         background: "none",
+  //         border: "none",
+  //         color: "var(--text-muted)",
+  //         font: "inherit",
+  //         fontSize: 14,
+  //         cursor: "pointer",
+  //         padding: 0,
+  //       }}
+  //     >
+  //       Logout
+  //     </button>
+  //   );
+  // }
+
   if (loggedIn) {
     return (
-      <button
-        onClick={handleLogout}
-        style={{
-          background: "none",
-          border: "none",
-          color: "var(--text-muted)",
-          font: "inherit",
-          fontSize: 14,
-          cursor: "pointer",
-          padding: 0,
-        }}
-      >
-        Logout
-      </button>
+      <>
+        <a href="/account" style={{ marginRight: 16 }}>
+          My Account
+        </a>
+        <button
+          onClick={handleLogout}
+          style={{
+            background: "none",
+            border: "none",
+            color: "var(--text-muted)",
+            font: "inherit",
+            fontSize: 14,
+            cursor: "pointer",
+            padding: 0,
+          }}
+        >
+          Logout
+        </button>
+      </>
     );
   }
 
