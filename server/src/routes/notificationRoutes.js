@@ -1,13 +1,15 @@
 import { Router } from "express";
-import { 
-    registerDeviceToken, 
-    sendTestNotification,
+import {
+  registerDeviceToken,
+  sendTestNotification,
+  sendNotification,
 } from "../controllers/notificationController.js";
-import { requireAuth } from "../middleware/auth.js";
+import { requireAuth, requireAdminKey, optionalAuth } from "../middleware/auth.js";
 
 const router = Router();
 
-router.post("/token", requireAuth, registerDeviceToken);
+router.post("/token", optionalAuth, registerDeviceToken);
 router.post("/test", requireAuth, sendTestNotification);
+router.post("/send", requireAdminKey, sendNotification);
 
 export default router;

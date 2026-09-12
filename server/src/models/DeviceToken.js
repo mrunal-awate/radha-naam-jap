@@ -2,10 +2,16 @@ import mongoose from "mongoose";
 
 const deviceTokenSchema = new mongoose.Schema(
   {
+    // userId: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "User",
+    //   required: true,
+    //   index: true,
+    // },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: false,
       index: true,
     },
 
@@ -24,7 +30,7 @@ const deviceTokenSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export default mongoose.model("DeviceToken", deviceTokenSchema);

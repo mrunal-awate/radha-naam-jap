@@ -75,3 +75,62 @@ export async function sendTestNotification(req, res) {
     });
   }
 }
+
+
+// Addes this new function on 13/09/26
+
+
+export async function sendNotification(req, res) {
+  try {
+    const { target = "all", userId, userIds, title, body } = req.body;
+
+    if (!title || !body) {
+      return res.status(400).json({ error: "title and body are required" });
+    }
+
+    let query = {};
+    if (target === "user" && userId) {
+      query = { userId };
+    } else if (target === "users" && Array.isArray(userIds)) {
+      query = { userId: { $in: userIds } };
+    }
+    // target === "all" -> query stays {} (includes guests, since userId can be null)
+
+    const devices = await DeviceToken.find(query);
+
+    if (!devices.length) {
+      return res.status(404).json({ error: "No matching devices found" });
+    }
+
+    const tokens = devices.map((d) => d.token);
+    const message = {
+      notification: { title, body },
+      tokens,
+    };
+
+    const response = await getMessaging(admin).sendEachForMulticast(message);
+
+    const invalidTokens = [];
+    response.responses.forEach((r, i) => {
+      if (!r.success && (r.error?.code === "messaging/registration-token-not-registered" || r.error?.code === "messaging/invalid-registration-token")) {
+        invalidTokens.push(tokens[i]);
+      }
+    });
+
+    let invalidTokensRemoved = 0;
+    if (invalidTokens.length) {
+      const result = await DeviceToken.deleteMany({ token: { $in: invalidTokens } });
+      invalidTokensRemoved = result.deletedCount;
+    }
+
+    return res.status(200).json({
+      message: "Notification sent",
+      successCount: response.successCount,
+      failureCount: response.failureCount,
+      invalidTokensRemoved,
+    });
+  } catch (error) {
+    console.error("Send notification error:", error);
+    return res.status(500).json({ error: "Failed to send notification" });
+  }
+}
