@@ -10,6 +10,6 @@ const router = Router();
 
 router.post("/token", optionalAuth, registerDeviceToken);
 router.post("/test", requireAuth, sendTestNotification);
-router.post("/send", requireAdminKey, sendNotification);
+router.post("/send", requireAuth, requireAdminKey, sendNotification);
 
 export default router;
