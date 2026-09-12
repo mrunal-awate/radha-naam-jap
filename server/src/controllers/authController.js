@@ -126,3 +126,14 @@ export async function deleteAccount(req, res) {
     res.status(500).json({ error: "Failed to delete account" });
   }
 }
+
+
+export async function getMe(req, res) {
+  try {
+    const user = await User.findById(req.userId).select("-passwordHash");
+    if (!user) return res.status(404).json({ error: "User not found" });
+    res.json({ user: { id: user._id, name: user.name, email: user.email, isAdmin: user.isAdmin } });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch user" });
+  }
+}
